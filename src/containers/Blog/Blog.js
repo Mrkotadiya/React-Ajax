@@ -47,11 +47,12 @@ class Blog extends Component {
           {/* <Route path="/new-post" component={NewPost} /> */}
           
           {this.state.auth ?<Route path="/new-post" component={NewPost} /> : null}
-           
-          <Route path="/posts/" component={Posts} />
-          <Redirect from="/" to="/posts" />
+          <Route path="/posts/" component={Posts} /> 
+          <Route render={()=> <h1>Not Found</h1>} /> 
+          {/* <Route path="/posts/" component={Posts} /> */}
+          {/* <Redirect fro m="/" to="/posts" /> */}
         </Switch>
-      </div>
+      </div> 
     );
   }
 }
