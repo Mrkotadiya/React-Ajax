@@ -1,13 +1,15 @@
 import React, { Component } from "react";
 // import axios from 'axios';
-import { Route, NavLink, Switch } from "react-router-dom";
-
+import { Route, NavLink, Switch, Redirect } from "react-router-dom";
 import "./Blog.css";
 import Posts from "./Posts/Posts";
 import NewPost from "./NewPost/NewPost";
 // import FullPost from "./FullPost/FullPost";
 
 class Blog extends Component {
+  state = {
+    auth: false,
+  };
   render() {
     return (
       <div className="Blog">
@@ -18,24 +20,22 @@ class Blog extends Component {
                 <NavLink
                   to="/posts/"
                   activeClassName="my-active"
-                  activeSty le={{
+                  activeSty
+                  le={{
                     color: "#fa923f",
                     textDecoration: "underline",
                   }}
-                >
-                  Posts
+                >Posts
                 </NavLink>
               </li>
               <li>
                 <NavLink
-                  to={{
-                    pathname: "/new-post",
+                  to={{pathname: "/new-post",
                     // pathname:this.props.match.url + '/new-post',
                     hash: "#submit",
                     search: "?quick-submit=true",
                   }}
-                >
-                  New Post
+                >New Post
                 </NavLink>
               </li>
             </ul>
@@ -45,9 +45,11 @@ class Blog extends Component {
             <Route path="/" render={() => <h1>Home 2</h1>} /> */}
         <Switch>
           {/* <Route path="/new-post" component={NewPost} /> */}
-          <Route path="/new-post" component={NewPost} />
+          
+          {this.state.auth ?<Route path="/new-post" component={NewPost} /> : null}
+           
           <Route path="/posts/" component={Posts} />
-          {/* <Route path="/:id" exact component={FullPost} /> */}
+          <Redirect from="/" to="/posts" />
         </Switch>
       </div>
     );
